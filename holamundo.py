@@ -1,17 +1,17 @@
-from flask import Flask, request, url_for
+from flask import Flask, request, url_for, redirect, abort
 app = Flask(__name__)
 
 @app.route("/")
 def index():
     return "Hola Mundo!"
 
-@app.route("/lele", methods=['POST'])
+@app.route("/lele", methods=['POST', 'GET'])
 def lele():
-    print(url_for('show_post', post_id=1))
-    print(request.form)
-    print(request.form['llave1'])
-    print(request.form['llave2'])
-    return "Lala"
+    abort(401)
+    return redirect(url_for('show_post', post_id=1))
+    # print(request.form)
+    # print(request.form['llave1'])
+    # print(request.form['llave2'])
 
 @app.route("/lala/<nombre>")
 def lala_nombre(nombre):
