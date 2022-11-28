@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, url_for
 app = Flask(__name__)
 
 @app.route("/")
@@ -7,6 +7,7 @@ def index():
 
 @app.route("/lele", methods=['POST'])
 def lele():
+    print(url_for('show_post', post_id=1))
     print(request.form)
     print(request.form['llave1'])
     print(request.form['llave2'])
