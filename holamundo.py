@@ -29,3 +29,7 @@ def show_post(post_id):
         return f"POST {post_id}"
     else:
         return f"GET {post_id}" 
+
+@app.route("/home", methods= ["GET"])
+def home():
+    return render_template("home.html", mensaje="Hola Mundo")
