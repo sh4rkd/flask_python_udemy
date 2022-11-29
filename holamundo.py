@@ -12,7 +12,11 @@ def lele():
     # print(request.form)
     # print(request.form['llave1'])
     # print(request.form['llave2'])
-    return render_template('lele.html')
+    #return render_template('lele.html')
+    return {
+        "username": "lele",
+        "email": "lele@lele.lele" 
+    }
 
 @app.route("/lala/<nombre>")
 def lala_nombre(nombre):
