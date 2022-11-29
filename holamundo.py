@@ -1,22 +1,31 @@
 from flask import Flask, request, url_for, redirect, abort, render_template
 app = Flask(__name__)
 
+import mysql.connector
+midb = mysql.connector.connect(
+    host="localhost",
+    user="SharkD",
+    passwd="250893",
+    database="prueba"
+)
+cursor = midb.cursor(dictionary=True)
+
+
 @app.route("/")
 def index():
     return "Hola Mundo!"
 
 @app.route("/lele", methods=['POST', 'GET'])
 def lele():
+    cursor.execute("SELECT * FROM Usuario")
+    usuarios = cursor.fetchall()
     #abort(401)
     #return redirect(url_for('show_post', post_id=1))
     # print(request.form)
     # print(request.form['llave1'])
     # print(request.form['llave2'])
     #return render_template('lele.html')
-    return {
-        "username": "lele",
-        "email": "lele@lele.lele" 
-    }
+    return render_template('lele.html', usuarios=usuarios)
 
 @app.route("/lala/<nombre>")
 def lala_nombre(nombre):
