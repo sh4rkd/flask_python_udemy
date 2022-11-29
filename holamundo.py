@@ -42,3 +42,17 @@ def show_post(post_id):
 @app.route("/home", methods= ["GET"])
 def home():
     return render_template("home.html", mensaje="Hola Mundo")
+
+@app.route("/create", methods= ["GET", "POST"])
+def create():
+    if request.method == "POST":
+        username = request.form["username"]
+        email = request.form["email"]
+        edad = request.form["edad"]
+        sql = "INSERT INTO Usuario (username, email, edad) VALUES (%s, %s, %s)"
+        val = (username, email, edad)
+        cursor.execute(sql, val)
+        midb.commit()
+        return redirect(url_for("lele"))
+    else:
+        return render_template("create.html")
